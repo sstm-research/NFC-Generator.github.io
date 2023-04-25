@@ -33,28 +33,32 @@ dropArea.addEventListener("drop", (event) => {
 
 async function showFile() {
   let fileType = file.type;
-  let validExtentions = ["text/plain"];
-  var url;
-  if (validExtentions.includes(fileType)) {
+  let validExtensions = ["text/plain"];
+  if (validExtensions.includes(fileType)) {
     let fileReader = new FileReader();
+    let textDecoder = new TextDecoder();
     fileReader.onload = function () {
-      url = fileReader.result;
-      uploadFile(url);
+      let buffer = fileReader.result;
+      let text = textDecoder.decode(buffer);
+      let lines = text.split('\n').map(line => line.trim());
+      uploadFile(lines);
     }
-    fileReader.readAsDataURL(file);
+    fileReader.readAsArrayBuffer(file);
   } else {
-    alert("Please Select a Txt");
+    alert("Please select a txt file.");
   }
 }
 
+
 async function uploadFile(url) {
-  const linksArray = [url];
+  const linksArray = url;
   const linksMap = {
-    'links': linksArray,
+    'e-mail':"email",
+    'links': linksArray
   };
   // starting the upload
   // for localhost you can use: http://localhost:5000 after semicolon is port number. 
-  let response = await fetch('https:link-to-flask-application', {
+  let response = await fetch('http://localhost:5000/gerenciador', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(linksMap)

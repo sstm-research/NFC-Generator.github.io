@@ -44,6 +44,10 @@ def update(tabela):
             return id,tamanho,link 
             break       
         elif id == tamanho:
+            sqld = (f"drop table{tabela};")
+            cursor.execute(sqld)
+            conn.commit()
+            cursor.close
             return 'Todos os Links Foram acessados.'
     
     
