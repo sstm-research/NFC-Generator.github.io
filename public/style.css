@@ -11,7 +11,22 @@ body {
 	font-family: sans-serif;
     background-color: #FFE99B;
 }
-
+.email {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    align-items: center;
+}
+.email input{
+    padding: 0.3rem;
+    margin: 0.3rem;
+    border-radius: 8px;
+    border-color: #f6b741;
+}
+.email p{
+    padding: 10px;
+}
 nav {
 	background-color: #FFE99B;
 	padding: 20px;
@@ -123,7 +138,7 @@ a{
       }
 
 
-.box div{
+.box .drag-Area{
     position: flex;
     padding: 20px 0 20px 0;
     margin: 5% 20% 5% 20%;
@@ -158,7 +173,6 @@ a{
     font-size: clamp(8px, 2vw, 16px);
 
     text-align: center;
-
     color: #000000; 
 }
 
@@ -166,7 +180,7 @@ a{
     position: flex;
     width: 60%;
     margin: 0 auto;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     font-family: 'helvetica';
     font-style: normal;
     font-weight: 400;
@@ -178,7 +192,7 @@ a{
 }
 
 .upload-button {
-    margin-top: 5px;
+    margin: 5px 0 5px 0;
     padding: 0.7vmax;
 	border-radius: 4px;
 	font-size: clamp(8px, 1vw, 16px);

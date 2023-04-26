@@ -5,6 +5,7 @@ input = dropArea.querySelector("input");
 
 
 let file;
+let emails = [];
 
 input.addEventListener("change", function () {
   file = this.files[0];
@@ -58,7 +59,7 @@ async function uploadFile(url) {
   };
   // starting the upload
   // for localhost you can use: http://localhost:5000 after semicolon is port number. 
-  let response = await fetch('http://localhost:5000/gerenciador', {
+  let response = await fetch('http://127.0.0.1:5500/public', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(linksMap)
@@ -72,3 +73,28 @@ async function uploadFile(url) {
     alert("Failed to upload");
   }
 }
+
+
+        // example {id:1592304983049, title: 'Deadpool', year: 2015}
+        const addEmails = (ev)=>{
+          ev.preventDefault();  //to stop the form submitting
+          let email = {
+              id: Date.now(),
+              title: document.getElementById('email').value,
+              
+          }
+          emails.push(email);
+         // document.forms[0].reset(); // to clear the form for the next entries
+          //document.querySelector('email').reset();
+
+          //for display purposes only
+           console.warn('added' , {emails} );
+          let pre = document.querySelector('#msg pre');
+          pre.textContent = '\n' + JSON.stringify(emails, '\t', 2); 
+
+          //saving to localStorage
+          localStorage.setItem('Emails', JSON.stringify(emails, linksMap) );
+      }
+      document.addEventListener('DOMContentLoaded', ()=>{
+          document.getElementById('btn').addEventListener('click', addEmails);
+      });
